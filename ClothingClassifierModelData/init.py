@@ -7,18 +7,17 @@ import os
 fashion_mnist = keras.datasets.fashion_mnist
 (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
 
-# Preprocess the data
 train_images = train_images / 255.0
 test_images = test_images / 255.0
 
-# Define class names
+
 class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
                'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
+# Convert everything to struct data class for better management?
 checkpoint_path = "ClothingClassifierModelData/cp.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 
-# Build the model
 def create_model():
     """Create Model for ML
     Returns:
@@ -31,12 +30,10 @@ def create_model():
         keras.layers.Dense(10, activation='softmax')
     ])
 
-    # Compile the model
+    # Compile
     model.compile(optimizer='adam',
                 loss='sparse_categorical_crossentropy',
                 metrics=['accuracy'])
-
-    # Train the model
     return model
 
 

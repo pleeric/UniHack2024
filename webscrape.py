@@ -28,27 +28,23 @@ def scrape_products(urls):
         # Find all product items on the page
         product_items = soup.find_all('li',class_='css-1uzpf0u')
 
-        # Loop through each product item and extract relevant information
         for product_item in product_items:
-            #product id
+            # Product id
             product_id = product_item['id']
 
-            # Extract product price
-            #product_price = product_item.select_one("span[data-automation*=product-price]").text
+            # TODO: Product price
 
-            # Extract product image URL
+            # Image URL
             product_image_url = product_item.find('img')['src']
             product_type = ClothingClassifier.typeclassify_image_from_url(product_image_url)
             #product_colour = ColourClassifier.colourclassify_image_from_url(product_image_url)
 
-            # Extract product page URL
-            # Currently using myer TODO: make product 
+            # Page URL
+            # Currently using myer 
+            # TODO: make product page url link compatible with all url's
             product_page_url = "https://www.myer.com.au"+product_item.find('a')['href']
-            
-            # Print or store the extracted information
 
-            #print("Price:", product_price)
-            
+            # Format and add data            
             data.append({"id":product_id,"pageurl":product_page_url,"imageurl":product_image_url,"type":product_type})
 
 

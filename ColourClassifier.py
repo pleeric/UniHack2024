@@ -22,17 +22,17 @@ def colourclassify_image_from_url(image_url):
     # Download the image
     response = requests.get(image_url)
     image = Image.open(BytesIO(response.content)).convert("L")  # Convert to grayscale
-    image = image.resize((28, 28))  # Resize to 28x28 (same as the Fashion MNIST images)
-    image_array = np.array(image) / 255.0  # Normalize pixel values
+    image = image.resize((28, 28))  # Resize to 28x28
+    image_array = np.array(image) / 255.0
     
-    # Reshape and predict
+    # Reshape
     
     image_array = np.expand_dims(image_array, axis=0)
-    prediction = ColourClassifier.predict(image_array)
     
-    # Get the predicted class
-    #The model thinks a shirt is a "bag" so we have 2 indices for "shirt"
+    # Predict (The model thinks a shirt is a "bag" so we have 2 indices for "shirt")
     type_class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat','Sandal', 'Shirt', 'Sneaker', 'Shirt', 'Ankle boot']
+    
+    prediction = ColourClassifier.predict(image_array)
     class_index = np.argmax(prediction)
     predicted_class = type_class_names[class_index]
     
