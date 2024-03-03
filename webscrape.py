@@ -40,8 +40,9 @@ def scrape_products(urls):
             product_image_url = product_item.find('img')['src']
             product_type = ClothingClassifier.typeclassify_image_from_url(product_image_url)
             #product_colour = ColourClassifier.colourclassify_image_from_url(product_image_url)
-            #print(product_type)
+
             # Extract product page URL
+            # Currently using myer TODO: make product 
             product_page_url = "https://www.myer.com.au"+product_item.find('a')['href']
             
             # Print or store the extracted information
